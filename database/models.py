@@ -1,4 +1,7 @@
-from sqlalchemy import Column, Integer, String, Base
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
 
 # SQLAlchemy model for Users table
 class User(Base):

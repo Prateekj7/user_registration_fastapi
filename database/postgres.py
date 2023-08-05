@@ -5,7 +5,7 @@ from database.models import Base
 # Function to create the PostgreSQL engine
 def create_postgres_engine():
     # Replace with your PostgreSQL connection URL
-    DATABASE_URL = "postgresql://username:password@localhost/dbname"
+    DATABASE_URL = "jdbc:postgresql://localhost:5432/postgres"
     return create_engine(DATABASE_URL)
 
 
