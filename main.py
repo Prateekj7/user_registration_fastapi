@@ -2,16 +2,18 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from database.postgres import create_postgres_engine, create_postgres_session
 from database.mongodb import insert_profile_picture, get_profile_picture
-from database.models import User
+from database.models import User, Base
 
 app = FastAPI()
 postgres_engine = create_postgres_engine()
 postgres_session = create_postgres_session(postgres_engine)
 
+Base.metadata.create_all(bind=postgres_engine)
+
 class UserResponse(BaseModel):
     full_name: str
     email: str
-    passwor: str
+    password: str
     phone: str
     profile_picture: str
 
@@ -59,6 +61,7 @@ async def get_user(user_id: int):
     return UserResponse(
         full_name=user.full_name,
         email=user.email,
+        password=user.password,
         phone=user.phone,
         profile_picture=profile_data["profile_picture"],
     )
